@@ -16,7 +16,7 @@ murmurHash3.hash32("My hovercraft is full of eels.", 25) // 2520298415
 somethingCompletelyDifferent = murmurHash3.noConflict()
 ```
 
-## License (MIT)
+## License
 
 Copyright © 2012 Karan Lyons
 
