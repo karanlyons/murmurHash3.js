@@ -43,7 +43,7 @@
 		// returns the 32bit int rotated left by that number of positions.
 		//
 		
-		return (x << n) | (x >>> (32 - n));
+		return (m << n) | (m >>> (32 - n));
 	}
 	
 	function _fmix(h) {
