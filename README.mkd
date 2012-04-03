@@ -1,4 +1,4 @@
-# Murmurhash3.js
+# MurmurHash3.js
 **A javascript implementation of MurmurHash3's x86 hashing algorithms.**
 
 ## Usage
