@@ -123,7 +123,7 @@
 	library.hash128 = function (key, seed) {
 		//
 		// Given a string, returns a 128 bit hash using the x86 flavor
-		// of MurmurHash3, as a hex.
+		// of MurmurHash3, as an unsigned hex.
 		// (Source: 
 		//	http://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp)
 		//
