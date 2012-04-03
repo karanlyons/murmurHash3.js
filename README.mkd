@@ -1,0 +1,17 @@
+# Murmurhash3.js
+**A javascript implementation of MurmurHash3's x86 hashing algorithms.**
+
+## Usage
+```javascript
+// Return a hash as a 32bit unsigned int:
+murmurHash3.hash32("I will not buy this record, it is scratched.") // 2832214938
+
+// Return a hash as a 128bit unsigned hex:
+murmurHash3.hash128("I will not buy this tobacconist's, it is scratched.") // "ef3f78669b5b7ba2f3f98e889adeaf"
+
+// Specify a seed (defaults to 0):
+murmurHash3.hash32("My hovercraft is full of eels.", 25) // 2520298415
+
+// Rebind murmurHash3:
+somethingCompletelyDifferent = murmurHash3.noConflict()
+```
