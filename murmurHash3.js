@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------+
-// | murmurHash3.js v2.0.0 (http://github.com/karanlyons/murmurHash.js)   |
+// | murmurHash3.js v2.1.0 (http://github.com/karanlyons/murmurHash.js)   |
 // | A javascript implementation of MurmurHash3's x86 hashing algorithms. |
 // |----------------------------------------------------------------------|
 // | Copyright (c) 2012 Karan Lyons                                       |
@@ -12,7 +12,7 @@
 	
 	// Create a local object that'll be exported or referenced globally.
 	var library = {
-		'version': '2.0.0',
+		'version': '2.1.0',
 		'x86': {},
 		'x64': {}
 	};
@@ -23,14 +23,6 @@
 	// PRIVATE FUNCTIONS
 	// -----------------
 	
-	function _x86Add(m, n) {
-		//
-		// Given two 32bit ints, returns the two added together as a 32bit int.
-		//
-		
-		return (((m & 0xffff) + (n & 0xffff)) + ((((m >>> 16) + (n >>> 16)) & 0xffff) << 16));
-	}
-	
 	
 	function _x86Multiply(m, n) {
 		//
@@ -38,7 +30,7 @@
 		// 32bit int.
 		//
 		
-		return ((((m & 0xffff) * n) + ((((m >>> 16) * n) & 0xffff) << 16))) & 0xffffffff;
+		return ((m & 0xffff) * n) + ((((m >>> 16) * n) & 0xffff) << 16);
 	}
 	
 	
@@ -244,7 +236,7 @@
 			
 			h1 ^= k1;
 			h1 = _x86Rotl(h1, 13);
-			h1 = _x86Add(_x86Multiply(h1, 5), 0xe6546b64);
+			h1 = _x86Multiply(h1, 5) + 0xe6546b64;
 		}
 		
 		k1 = 0;
@@ -310,8 +302,8 @@
 			h1 ^= k1;
 			
 			h1 = _x86Rotl(h1, 19);
-			h1 = _x86Add(h1, h2);
-			h1 = _x86Add(_x86Multiply(h1, 5), 0x561ccd1b);
+			h1 += h2;
+			h1 = _x86Multiply(h1, 5) + 0x561ccd1b;
 			
 			k2 = _x86Multiply(k2, c2);
 			k2 = _x86Rotl(k2, 16);
@@ -319,8 +311,8 @@
 			h2 ^= k2;
 			
 			h2 = _x86Rotl(h2, 17);
-			h2 = _x86Add(h2, h3);
-			h2 = _x86Add(_x86Multiply(h2, 5), 0x0bcaa747);
+			h2 += h3;
+			h2 = _x86Multiply(h2, 5) + 0x0bcaa747;
 			
 			k3 = _x86Multiply(k3, c3);
 			k3 = _x86Rotl(k3, 17);
@@ -328,8 +320,8 @@
 			h3 ^= k3;
 			
 			h3 = _x86Rotl(h3, 15);
-			h3 = _x86Add(h3, h4);
-			h3 = _x86Add(_x86Multiply(h3, 5), 0x96cd1c35);
+			h3 += h4;
+			h3 = _x86Multiply(h3, 5) + 0x96cd1c35;
 			
 			k4 = _x86Multiply(k4, c4);
 			k4 = _x86Rotl(k4, 18);
@@ -337,8 +329,8 @@
 			h4 ^= k4;
 			
 			h4 = _x86Rotl(h4, 13);
-			h4 = _x86Add(h4, h1);
-			h4 = _x86Add(_x86Multiply(h4, 5), 0x32ac3b17);
+			h4 += h1;
+			h4 = _x86Multiply(h4, 5) + 0x32ac3b17;
 		}
 		
 		k1 = 0;
@@ -414,24 +406,24 @@
 		h3 ^= key.length;
 		h4 ^= key.length;
 		
-		h1 = _x86Add(h1, h2);
-		h1 = _x86Add(h1, h3);
-		h1 = _x86Add(h1, h4);
-		h2 = _x86Add(h2, h1);
-		h3 = _x86Add(h3, h1);
-		h4 = _x86Add(h4, h1);
+		h1 += h2;
+		h1 += h3;
+		h1 += h4;
+		h2 += h1;
+		h3 += h1;
+		h4 += h1;
 		
 		h1 = _x86Fmix(h1);
 		h2 = _x86Fmix(h2);
 		h3 = _x86Fmix(h3);
 		h4 = _x86Fmix(h4);
 		
-		h1 = _x86Add(h1, h2);
-		h1 = _x86Add(h1, h3);
-		h1 = _x86Add(h1, h4);
-		h2 = _x86Add(h2, h1);
-		h3 = _x86Add(h3, h1);
-		h4 = _x86Add(h4, h1);
+		h1 += h2;
+		h1 += h3;
+		h1 += h4;
+		h2 += h1;
+		h3 += h1;
+		h4 += h1;
 		
 		return ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h1 >>> 0).toString(16)).slice(-8) + ("00000000" + (h4 >>> 0).toString(16)).slice(-8) + ("00000000" + (h3 >>> 0).toString(16)).slice(-8);
 	};
