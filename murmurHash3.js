@@ -23,7 +23,6 @@
 	// PRIVATE FUNCTIONS
 	// -----------------
 	
-	
 	function _x86Multiply(m, n) {
 		//
 		// Given two 32bit ints, returns the two multiplied together as a
