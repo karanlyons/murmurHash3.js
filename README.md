@@ -4,17 +4,25 @@
 ## Usage
 ```javascript
 // Return a 32bit hash as a unsigned int:
-murmurHash3.x86.hash32("I will not buy this record, it is scratched.") // 2832214938
+> murmurHash3.x86.hash32("I will not buy this record, it is scratched.")
+  2832214938
 
 // Return a 128bit hash as a unsigned hex:
-murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.") // "ef3f78669b5b7ba200f3f98e889adeaf"
-murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.") // "d30654abbd8227e367d73523f0079673"
+> murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.")
+  "ef3f78669b5b7ba200f3f98e889adeaf"
+> murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.")
+  "d30654abbd8227e367d73523f0079673"
 
 // Specify a seed (defaults to 0):
-murmurHash3.x86.hash32("My hovercraft is full of eels.", 25) // 2520298415
+> murmurHash3.x86.hash32("My hovercraft is full of eels.", 25)
+  2520298415
 
 // Rebind murmurHash3:
-somethingCompletelyDifferent = murmurHash3.noConflict()
+> somethingCompletelyDifferent = murmurHash3.noConflict()
+> murmurHash3
+undefined
+> somethingCompletelyDifferent.version
+  "2.1.0"
 ```
 
 ## License
