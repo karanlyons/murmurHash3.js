@@ -20,7 +20,7 @@
 // Rebind murmurHash3:
 > somethingCompletelyDifferent = murmurHash3.noConflict()
 > murmurHash3
-undefined
+  undefined
 > somethingCompletelyDifferent.version
   "2.1.0"
 ```
