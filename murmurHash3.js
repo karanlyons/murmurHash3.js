@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------+
-// | murmurHash3.js v2.1.0 (http://github.com/karanlyons/murmurHash.js)   |
+// | murmurHash3.js v2.1.1 (http://github.com/karanlyons/murmurHash.js)   |
 // | A javascript implementation of MurmurHash3's x86 hashing algorithms. |
 // |----------------------------------------------------------------------|
 // | Copyright (c) 2012 Karan Lyons                                       |
@@ -12,7 +12,7 @@
 	
 	// Create a local object that'll be exported or referenced globally.
 	var library = {
-		'version': '2.1.0',
+		'version': '2.1.1',
 		'x86': {},
 		'x64': {}
 	};
@@ -571,13 +571,15 @@
 		// Use murmurHash3.noConflict to restore `murmurHash3` back to its
 		// original value. Returns a reference to the library object, to allow
 		// it to be used under a different name.
-		library.noConflict = (function (oldmurmurHash3) {
-			return function () {
-				root.murmurHash3 = oldmurmurHash3;
-				library.noConflict = undefined;
-				return library;
-			};
-		})(root.murmurHash3);
+		library._murmurHash3 = root.murmurHash3
+		
+		library.noConflict = function () {
+			root.murmurHash3 = library._murmurHash3;
+			library._murmurHash3 = undefined;
+			library.noConflict = undefined;
+			
+			return library;
+		};
 		
 		root.murmurHash3 = library;
 	}
