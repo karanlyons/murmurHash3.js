@@ -9,7 +9,7 @@
 
 // Return a 128bit hash as a unsigned hex:
 > murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.")
-  "ef3f78669b5b7ba200f3f98e889adeaf"
+  "9b5b7ba2ef3f7866889adeaf00f3f98e"
 > murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.")
   "d30654abbd8227e367d73523f0079673"
 
@@ -22,7 +22,7 @@
 > murmurHash3
   undefined
 > somethingCompletelyDifferent.version
-  "2.1.1"
+  "2.1.2"
 ```
 
 ## License
