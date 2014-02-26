@@ -11,7 +11,7 @@
 > murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.")
   "9b5b7ba2ef3f7866889adeaf00f3f98e"
 > murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.")
-  "bd8227e3d30654abf007967367d73523"
+  "d30654abbd8227e367d73523f0079673"
 
 // Specify a seed (defaults to 0):
 > murmurHash3.x86.hash32("My hovercraft is full of eels.", 25)
