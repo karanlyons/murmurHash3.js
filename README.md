@@ -9,7 +9,7 @@
 
 // Return a 128bit hash as a unsigned hex:
 > murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.")
-  "ef3f78669b5b7ba200f3f98e889adeaf"
+  "9b5b7ba2ef3f7866889adeaf00f3f98e"
 > murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.")
   "d30654abbd8227e367d73523f0079673"
 
@@ -22,12 +22,12 @@
 > murmurHash3
   undefined
 > somethingCompletelyDifferent.version
-  "2.1.1"
+  "2.1.2"
 ```
 
 ## License
 
-Copyright © 2012 Karan Lyons
+Copyright © 2014 Karan Lyons
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
