@@ -12,7 +12,7 @@
 	
 	// Create a local object that'll be exported or referenced globally.
 	var library = {
-		'version': '2.1.1',
+		'version': '2.1.2',
 		'x86': {},
 		'x64': {}
 	};
@@ -424,7 +424,7 @@
 		h3 += h1;
 		h4 += h1;
 		
-		return ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h1 >>> 0).toString(16)).slice(-8) + ("00000000" + (h4 >>> 0).toString(16)).slice(-8) + ("00000000" + (h3 >>> 0).toString(16)).slice(-8);
+		return ("00000000" + (h1 >>> 0).toString(16)).slice(-8) + ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h3 >>> 0).toString(16)).slice(-8) + ("00000000" + (h4 >>> 0).toString(16)).slice(-8);
 	};
 	
 	
