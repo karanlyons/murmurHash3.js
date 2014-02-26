@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------+
-// | murmurHash3.js v2.1.1 (http://github.com/karanlyons/murmurHash.js)   |
+// | murmurHash3.js v2.1.2 (http://github.com/karanlyons/murmurHash.js)   |
 // | A javascript implementation of MurmurHash3's x86 hashing algorithms. |
 // |----------------------------------------------------------------------|
 // | Copyright (c) 2012 Karan Lyons                                       |
