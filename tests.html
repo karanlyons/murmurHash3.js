@@ -14,7 +14,7 @@
 	<script>
 		'use strict';
 		var noConflict;
-		
+
 		if (
 			// x86 32bit Tests
 			(murmurHash3.x86.hash32("I will not buy this record, it is scratched.") === 2832214938) &&
@@ -25,7 +25,8 @@
 			(murmurHash3.x86.hash32("0123") === 3558446240) &&
 			(murmurHash3.x86.hash32("01234") === 433070448) &&
 			(murmurHash3.x86.hash32("", 1) === 1364076727) &&
-			
+			(murmurHash3.x86.hash32("My 🚀 is full of 🦎.") === 1818098979) &&
+
 			// x86 128bit Tests
 			(murmurHash3.x86.hash128("I will not buy this tobacconist's, it is scratched.") === "9b5b7ba2ef3f7866889adeaf00f3f98e") &&
 			(murmurHash3.x86.hash128("") === "00000000000000000000000000000000") &&
@@ -46,7 +47,8 @@
 			(murmurHash3.x86.hash128("0123456789abcde") === "3c76c46d4d0818c0add433daa78673fa") &&
 			(murmurHash3.x86.hash128("0123456789abcdef") === "fb7d440936aed30a48ad1d9b572b3bfd") &&
 			(murmurHash3.x86.hash128("", 1) === "88c4adec54d201b954d201b954d201b9") &&
-			
+			(murmurHash3.x86.hash128("My 🚀 is full of 🦎.") === "e616d85ffee7f678dab461995b5bb90f") &&
+
 			// x64 128bit Tests
 			(murmurHash3.x64.hash128("I will not buy this tobacconist's, it is scratched.") === "d30654abbd8227e367d73523f0079673") &&
 			(murmurHash3.x64.hash128("") === "00000000000000000000000000000000") &&
@@ -67,7 +69,8 @@
 			(murmurHash3.x64.hash128("0123456789abcde") === "a62dd5f6c0bf23514fccf50c7c544cf0") &&
 			(murmurHash3.x64.hash128("0123456789abcdef") === "4be06d94cf4ad1a787c35b5c63a708da") &&
 			(murmurHash3.x64.hash128("", 1) === "4610abe56eff5cb551622daa78f83583") &&
-			
+			(murmurHash3.x64.hash128("My 🚀 is full of 🦎.") === "d047391e58c6c9dfccde62c92e049f50") &&
+
 			// noConflict Test
 			(noConflict = murmurHash3.noConflict()) &&
 			(murmurHash3 === "Some Old Value") &&
