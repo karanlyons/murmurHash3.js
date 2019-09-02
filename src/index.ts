@@ -100,7 +100,7 @@ function mul64(m: u64, n: u64): u64 {
 function rol64(m: u64, bits: number): u64 {
   bits %= 64;
   
-  /* istanbul ignore if: here for completeness but never used. */
+  // istanbul ignore if: here for completeness but never used.
   if (bits === 32) {
     return [m[1], m[0]];
   } else if (bits < 32) {
@@ -120,7 +120,7 @@ function rol64(m: u64, bits: number): u64 {
 function shl64(m: u64, bits: number): u64 {
   bits %= 64;
   
-  /* istanbul ignore if: here for completeness but never used. */
+  // istanbul ignore if: here for completeness but never used.
   if (bits === 0) {
     return m;
   } else if (bits < 32) {
@@ -182,7 +182,7 @@ function x86hash32(
   state: u32 | x86hash32State = 0x0,
   finalize: boolean = true,
 ): u32 | x86hash32State {
-  /* istanbul ignore else */
+  // istanbul ignore else
   if (typeof buf === 'string') { buf = strToBuf(buf); }
   
   let h1: u32;
