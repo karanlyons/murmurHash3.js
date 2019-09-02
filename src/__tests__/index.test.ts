@@ -25,9 +25,7 @@ const ascendingBuf = (
   "\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f"
 );
 
-const testVectors: {
-  [str: string]: [u32, string, string],
-} = {
+const testVectors: Record<string, [u32, string, string]> = {
   // Ignore for all chunk tests as this is an empty buffer.
   "": [
     0,
@@ -95,11 +93,11 @@ function chunk(data: string | Uint8Array, size: number): string[] | Uint8Array[]
 }
 
 
-const testVectorsx86hash32: {[key: string]: u32} = {};
-const testVectorsx86hash128str: {[key: string]: string} = {};
-const testVectorsx86hash128buf: {[key: string]: Uint8Array} = {};
-const testVectorsx64hash128str: {[key: string]: string} = {};
-const testVectorsx64hash128buf: {[key: string]: Uint8Array} = {};
+const testVectorsx86hash32: Record<string, u32> = {};
+const testVectorsx86hash128str: Record<string, string> = {};
+const testVectorsx86hash128buf: Record<string, Uint8Array> = {};
+const testVectorsx64hash128str: Record<string, string> = {};
+const testVectorsx64hash128buf: Record<string, Uint8Array> = {};
 
 for (const [key, values] of Object.entries(testVectors)) {
   [
