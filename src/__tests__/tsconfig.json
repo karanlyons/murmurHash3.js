@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "esnext",
+    
+    "lib": [
+      "dom",
+      "es2017",
+      "es2019"
+    ],
+  }
+}

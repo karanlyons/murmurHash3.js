@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+
+    "rootDir": "src",
+    "outDir": "lib",
+
+    "declaration": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "newLine": "LF",
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+
+    "noEmitOnError": false,
+
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+  },
+  "include": [
+      "src/**/*"
+  ],
+  "exclude": [
+    "**/__tests__/**/*"
+  ]
+}
