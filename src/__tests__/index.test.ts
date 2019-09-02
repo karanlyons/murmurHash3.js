@@ -119,7 +119,7 @@ describe.each(
   [...new Array(256).keys()]
     .map(i => [
       new Uint8Array([i, 255 - i]),
-      `${`00${i.toString(16)}`.slice(-2)}${`00${(255 - i).toString(16)}`.slice(-2)}`,
+      `${i.toString(16).padStart(2, "0")}${(255 - i).toString(16).padStart(2, "0")}`,
     ] as [Uint8Array, string]),
 )(
   "bufToHex(new Uint8Array(%p))",
