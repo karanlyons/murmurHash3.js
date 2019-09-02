@@ -18,7 +18,7 @@ type u64spill = Brand<'u64spill', [u32, u32, u32, u32]>;
 export const strToBuf = TextEncoder.prototype.encode.bind(new TextEncoder());
 
 // tslint:disable-next-line: prefer-array-literal
-const hexLUT = [...new Array(256).keys()].map(i => i.toString(16).padStart(2, "0"));
+const hexLUT = [...new Array(256).keys()].map(i => `00${i.toString(16)}`.slice(-2));
 
 export function bufToHex(buf: Uint8Array): string {
   const str = [];

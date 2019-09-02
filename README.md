@@ -1,12 +1,13 @@
 [![npm version](https://badge.fury.io/js/murmurhash3.js.svg)](https://badge.fury.io/js/murmurhash3.js)
 
-# MurmurHash3.js
-**A javascript implementation of 
-[MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp)'s 
-hashing algorithms.**
+## MurmurHash3.js
+A javascript implementation of
+[MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp)’s
+hashing algorithms.
 
-## Usage
 ```javascript
+> import * as murmurHash3 from 'mumurHash3.js';
+
 // Return a 32bit hash as an unsigned integer:
 > murmurHash3.x86.hash32("I will not buy this record, it is scratched.");
   2832214938
@@ -31,3 +32,8 @@ hashing algorithms.**
 > murmurHash3.x86.hash32(buf.slice(8), state, true);
   420836317
 ```
+
+Requires [`TextEncoder`](https://caniuse.com/#feat=textencoder),
+[`TypedArray`s & `DataView`](https://caniuse.com/#feat=typedarrays), and additional
+[es6/es2015](https://caniuse.com/#feat=es6) features; bring your own transpiler and
+polyfills to target the past.
