@@ -106,10 +106,10 @@ for (const [key, values] of Object.entries(testVectors)) {
     testVectorsx64hash128str[key],
   ] = values;
   testVectorsx86hash128buf[key] = new Uint8Array(
-    chunk(testVectorsx86hash128str[key], 2).map(s => parseInt(s, 16))
+    chunk(testVectorsx86hash128str[key], 2).map(s => parseInt(s, 16)),
   );
   testVectorsx64hash128buf[key] = new Uint8Array(
-    chunk(testVectorsx64hash128str[key], 2).map(s => parseInt(s, 16))
+    chunk(testVectorsx64hash128str[key], 2).map(s => parseInt(s, 16)),
   );
 }
 
