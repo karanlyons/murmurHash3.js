@@ -444,7 +444,7 @@ function x86hash128(
         k1 = mul32(k1, x86hash128c2);
         h1 ^= k1;
     }
-  
+    
     h1 ^= len & 0xffffffff;
     h2 ^= len & 0xffffffff;
     h3 ^= len & 0xffffffff;
@@ -592,7 +592,7 @@ function x64hash128(
   const remainder = (buf.byteLength - i) % 16;
   const bytes = buf.byteLength - i - remainder;
   len += bytes;
-    
+  
   for (; i < bytes; i += 16) {
     [h1, h2] = x64mix128(
       h1, h2,
