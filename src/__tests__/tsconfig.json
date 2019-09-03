@@ -8,5 +8,9 @@
       "dom",
       "esnext"
     ],
-  }
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": []
 }

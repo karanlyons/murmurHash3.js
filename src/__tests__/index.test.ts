@@ -123,7 +123,7 @@ describe.each(
     ] as [Uint8Array, string]),
 )(
   "bufToHex(new Uint8Array(%p))",
-  (buf: Uint8Array, expected: string) => {
+  (buf, expected) => {
     test(`returns ${expected}`, () => {
       expect(bufToHex(buf)).toBe(expected);
     });
@@ -132,10 +132,11 @@ describe.each(
 
 
 describe.each(Object.entries(testVectorsx86hash32)
-  .map(([k, v]) => [JSON.stringify(k), k, v]) as [string, string, u32][],
+  .map(([k, v]) => [JSON.stringify(k), k, v] as [string, string, u32]),
 )(
   "x86.hash32(%s)",
-  (jsonStr, str: string, expected: u32) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, str, expected) => {
     test(`returns ${expected}`, () => {
       expect(x86.hash32(str)).toBe(expected);
     });
@@ -146,7 +147,8 @@ describe.each(Object.entries(testVectorsx86hash128str)
   .map(([k, v]) => [JSON.stringify(k), k, v]),
 )(
   "x86.hash128(%s)",
-  (jsonStr, str: string, expected: string) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, str, expected) => {
     test(`returns ${expected}`, () => {
       expect(x86.hash128(str)).toBe(expected);
     });
@@ -157,7 +159,7 @@ describe.each(Object.entries(testVectorsx86hash128buf)
   .map(([k, v]) => [strToBuf(k), v]),
 )(
   "x86.hash128(%p)",
-  (buf: Uint8Array, expected: Uint8Array) => {
+  (buf, expected) => {
     test(`returns ${expected}`, () => {
       expect(x86.hash128(buf)).toEqual(expected);
     });
@@ -168,7 +170,8 @@ describe.each(Object.entries(testVectorsx64hash128str)
   .map(([k, v]) => [JSON.stringify(k), k, v]),
 )(
   "x64.hash128(%s)",
-  (jsonStr, str: string, expected: string) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, str, expected) => {
     test(`returns ${expected}`, () => {
       expect(x64.hash128(str)).toBe(expected);
     });
@@ -179,7 +182,7 @@ describe.each(Object.entries(testVectorsx64hash128buf)
   .map(([k, v]) => [strToBuf(k), v]),
 )(
   "x64.hash128(%p)",
-  (buf: Uint8Array, expected: Uint8Array) => {
+  (buf, expected) => {
     test(`returns ${expected}`, () => {
       expect(x64.hash128(buf)).toEqual(expected);
     });
@@ -194,14 +197,15 @@ describe.each(
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(k.length - 1).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
-      ])
+      ] as [string, number, string[], u32])
     )),
 )(
   "x86.hash32(chunk(%s, %p))",
-  (jsonStr, size, chunks, expected) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x86hash32State = 0x0;
-      for (const chunk of chunks as string[]) {
+      for (const chunk of chunks) {
         state = x86.hash32(chunk, state, false);
       }
       
@@ -218,14 +222,15 @@ describe.each(
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(k.length - 1).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
-      ])
+      ] as [string, number, string[], string])
     ),
 ))(
   "x86.hash128(chunk(%s, %p))",
-  (jsonStr, size, chunks, expected) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x86hash128State = 0x0;
-      for (const chunk of chunks as string[]) {
+      for (const chunk of chunks) {
         state = x86.hash128(chunk, state, false);
       }
       
@@ -237,19 +242,20 @@ describe.each(
 describe.each(
   Object.entries(testVectorsx86hash128buf)
     .slice(1)
-    .map(([k, v]) => [strToBuf(k), k, v] as [Uint8Array, string, Uint8Array])
+    .map(([k, v]) => ([strToBuf(k), k, v] as const))
     .flatMap(([k, s, v]) => (
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(k.byteLength - 1).keys()].map(i => [
         JSON.stringify(s), i + 1, chunk(k, i + 1), v,
-      ])
+      ] as [string, number, Uint8Array[], Uint8Array])
     )),
 )(
   "x86.hash128(chunk(strToBuf(%s), %p))",
-  (jsonStr, size, chunks, expected) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x86hash128State = 0x0;
-      for (const chunk of chunks as Uint8Array[]) {
+      for (const chunk of chunks) {
         state = x86.hash128(chunk, state, false);
       }
       
@@ -265,14 +271,15 @@ describe.each(
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(k.length - 1).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
-      ])
+      ] as [string, number, string[], string])
     )),
 )(
   "x64.hash128(chunk(%s, %p))",
-  (jsonStr, size, chunks, expected) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x64hash128State = 0x0;
-      for (const chunk of chunks as string[]) {
+      for (const chunk of chunks) {
         state = x64.hash128(chunk, state, false);
       }
       
@@ -284,19 +291,20 @@ describe.each(
 describe.each(
   Object.entries(testVectorsx64hash128buf)
     .slice(1)
-    .map(([k, v]) => [strToBuf(k), k, v] as [Uint8Array, string, Uint8Array])
+    .map(([k, v]) => ([strToBuf(k), k, v] as const))
     .flatMap(([k, s, v]) => (
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(k.byteLength - 1).keys()].map(i => [
         JSON.stringify(s), i + 1, chunk(k, i + 1), v,
-      ])
+      ] as [string, number, Uint8Array[], Uint8Array])
     )),
 )(
   "x64.hash128(chunk(strToBuf(%s), %p))",
-  (jsonStr, size, chunks, expected) => {
+  // tslint:disable-next-line: variable-name
+  (_jsonStr, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x64hash128State = 0x0;
-      for (const chunk of chunks as Uint8Array[]) {
+      for (const chunk of chunks) {
         state = x64.hash128(chunk, state, false);
       }
       
