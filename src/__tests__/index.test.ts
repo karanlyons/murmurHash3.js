@@ -31,6 +31,17 @@ const testVectors: Record<string, [u32, string, string]> = {
     "00000000000000000000000000000000",
     "00000000000000000000000000000000",
   ],
+  [ascendingBuf]: [
+    2303633163,
+    "cc32c3983052e6520858cfaa82d82209",
+    "ffd5522d8d812301a22238eb56338ea1",
+  ],
+  // Cover remainder === 15 case.
+  [ascendingBuf.slice(0, 31)]: [
+    1682074326,
+    "24ab92eeac1d89ca45f5bc189ad5dda3",
+    "053dd3e1a32cd0949ee59aefb4005490",
+  ],
   "I will not buy this record, it is scratched.": [
     2832214938,
     "a0a9683b25ac5e40d9af2895890dddf5",
@@ -51,17 +62,6 @@ const testVectors: Record<string, [u32, string, string]> = {
     1553108894,
     "3ffaf018ca173b58c4e26affcd6a7d02",
     "e52c1f398ab5f107e77b2d1eab4e8cc9",
-  ],
-  [ascendingBuf]: [
-    2303633163,
-    "cc32c3983052e6520858cfaa82d82209",
-    "ffd5522d8d812301a22238eb56338ea1",
-  ],
-  // Cover remainder === 15 case.
-  [ascendingBuf.slice(0, 31)]: [
-    1682074326,
-    "24ab92eeac1d89ca45f5bc189ad5dda3",
-    "053dd3e1a32cd0949ee59aefb4005490",
   ],
   // Ignore for string chunk tests as emojis are multiple codepoints.
   "My 🚀 is full of 🦎.": [
