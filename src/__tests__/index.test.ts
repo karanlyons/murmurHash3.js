@@ -26,7 +26,6 @@ const ascendingBuf = (
 );
 
 const testVectors: Record<string, [u32, string, string]> = {
-  // Ignore for all chunk tests as this is an empty buffer.
   "": [
     0,
     "00000000000000000000000000000000",
@@ -80,11 +79,13 @@ function chunk(data: string | Uint8Array, size: number): string[] | Uint8Array[]
   const chunks = [];
   
   if (typeof data === 'string') {
+    if (data.length === 0) { return [data]; }
     for (let i = 0; i < data.length; i += size) {
       chunks.push(data.substr(i, size));
     }
     return chunks as string[];
   } else {
+    if (data.byteLength === 0) { return [data]; }
     for (let i = 0; i < data.byteLength; i += size) {
       chunks.push(data.subarray(i, i + size));
     }
@@ -192,10 +193,10 @@ describe.each(Object.entries(testVectorsx64hash128buf)
 
 describe.each(
   Object.entries(testVectorsx86hash32)
-    .slice(1, -1)
+    .slice(0, -1)
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(k.length - 1).keys()].map(i => [
+      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], u32])
     )),
@@ -217,10 +218,10 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx86hash128str)
-    .slice(1, -1)
+    .slice(0, -1)
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(k.length - 1).keys()].map(i => [
+      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], string])
     ),
@@ -241,11 +242,10 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx86hash128buf)
-    .slice(1)
     .map(([k, v]) => ([strToBuf(k), k, v] as const))
     .flatMap(([k, s, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(k.byteLength - 1).keys()].map(i => [
+      [...new Array(Math.max(1, k.byteLength - 1)).keys()].map(i => [
         JSON.stringify(s), i + 1, chunk(k, i + 1), v,
       ] as [string, number, Uint8Array[], Uint8Array])
     )),
@@ -266,10 +266,10 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx64hash128str)
-    .slice(1, -1)
+    .slice(0, -1)
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(k.length - 1).keys()].map(i => [
+      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
         JSON.stringify(k), i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], string])
     )),
@@ -290,11 +290,10 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx64hash128buf)
-    .slice(1)
     .map(([k, v]) => ([strToBuf(k), k, v] as const))
     .flatMap(([k, s, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(k.byteLength - 1).keys()].map(i => [
+      [...new Array(Math.max(1, k.byteLength - 1)).keys()].map(i => [
         JSON.stringify(s), i + 1, chunk(k, i + 1), v,
       ] as [string, number, Uint8Array[], Uint8Array])
     )),
