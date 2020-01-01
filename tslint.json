@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "warn",
+    "extends": [
+        "tslint-config-airbnb"
+    ],
+    "jsRules": {},
+    "rules": {
+        "align": false,
+        "no-consecutive-blank-lines": false,
+        "no-else-after-return": false,
+        "no-increment-decrement": false,
+        "no-parameter-reassignment": false,
+        "no-trailing-whitespace": [true, "ignore-blank-lines"],
+        "quotemark": false
+    },
+    "rulesDirectory": []
+}

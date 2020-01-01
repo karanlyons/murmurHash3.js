@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": []
+}
