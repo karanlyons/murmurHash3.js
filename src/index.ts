@@ -34,8 +34,8 @@ function mul32(m: u32, n: u32): u32 {
   return ((m & 0xffff) * n) + ((((m >>> 16) * n) & 0xffff) << 16);
 }
 
-function rol32(n: u32, bits: u32): u32 {
-  return (n << bits) | (n >>> (32 - bits));
+function rol32(n: u32, r: u32): u32 {
+  return (n << r) | (n >>> (32 - r));
 }
 
 
@@ -97,41 +97,41 @@ function mul64(m: u64, n: u64): u64 {
   return [(os[0] << 16) | os[1], (os[2] << 16) | os[3]];
 }
 
-function rol64(m: u64, bits: number): u64 {
-  bits %= 64;
+function rol64(n: u64, r: number): u64 {
+  r %= 64;
   
   // istanbul ignore if: here for completeness but never used.
-  if (bits === 32) {
-    return [m[1], m[0]];
-  } else if (bits < 32) {
+  if (r === 32) {
+    return [n[1], n[0]];
+  } else if (r < 32) {
     return [
-      (m[0] << bits) | (m[1] >>> (32 - bits)),
-      (m[1] << bits) | (m[0] >>> (32 - bits)),
+      (n[0] << r) | (n[1] >>> (32 - r)),
+      (n[1] << r) | (n[0] >>> (32 - r)),
     ];
   } else {
-    bits -= 32;
+    r -= 32;
     return [
-      (m[1] << bits) | (m[0] >>> (32 - bits)),
-      (m[0] << bits) | (m[1] >>> (32 - bits)),
+      (n[1] << r) | (n[0] >>> (32 - r)),
+      (n[0] << r) | (n[1] >>> (32 - r)),
     ];
   }
 }
 
-function shl64(m: u64, bits: number): u64 {
-  bits %= 64;
+function shl64(n: u64, s: number): u64 {
+  s %= 64;
   
   // istanbul ignore if: here for completeness but never used.
-  if (bits === 0) {
-    return m;
-  } else if (bits < 32) {
-    return [(m[0] << bits) | (m[1] >>> (32 - bits)), m[1] << bits];
+  if (s === 0) {
+    return n;
+  } else if (s < 32) {
+    return [(n[0] << s) | (n[1] >>> (32 - s)), n[1] << s];
   } else {
-    return [m[1] << (bits - 32), 0x0];
+    return [n[1] << (s - 32), 0x0];
   }
 }
 
-function xor64(m: u64, n: u64): u64 {
-  return [m[0] ^ n[0], m[1] ^ n[1]];
+function xor64(a: u64, b: u64): u64 {
+  return [a[0] ^ b[0], a[1] ^ b[1]];
 }
 
 
