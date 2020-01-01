@@ -3,7 +3,7 @@
  * | murmurHash3.js v3.0.0 (http://github.com/karanlyons/murmurHash.js)               |
  * | A typescript/javascript implementation of MurmurHash3's x86 hashing algorithms.  |
  * |----------------------------------------------------------------------------------|
- * | Copyright (c) 2012–2019 Karan Lyons. Freely distributable under the MIT license. |
+ * | Copyright (c) 2012-2020 Karan Lyons. Freely distributable under the MIT license. |
  * +----------------------------------------------------------------------------------+
  */
 
