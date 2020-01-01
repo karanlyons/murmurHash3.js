@@ -8,6 +8,8 @@
  */
 
 
+export const version = '3.0.0';
+
 type Brand<Name, Type> = Type & {_type?: Name};
 export type u32 = Brand<'u32', number>;
 export type u64 = Brand<'u64', [u32, u32]>;
@@ -478,6 +480,9 @@ function x86hash128(
 }
 
 
+export const x86 = { hash32: x86hash32, hash128: x86hash128 };
+
+
 function x64fmix64(h: u64): u64 {
   // [0x0, h[0] >>> 1] is a 33 bit shr.
   h = xor64(h, [0x0, h[0] >>> 1]);
@@ -664,7 +669,5 @@ function x64hash128(
   }
 }
 
-export const version = '3.0.0';
+
 export const x64 = { hash128: x64hash128 };
-export const x86 = { hash128: x86hash128, hash32: x86hash32 };
-export default { bufToHex, strToBuf, version, x64, x86 };

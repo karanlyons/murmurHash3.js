@@ -6,7 +6,7 @@ A javascript implementation of
 hashing algorithms.
 
 ```javascript
-> import * as murmurHash3 from 'mumurHash3.js';
+> murmurHash3 = require('mumurHash3.js');
 
 // Return a 32bit hash as an unsigned integer:
 > murmurHash3.x86.hash32("I will not buy this record, it is scratched.");
