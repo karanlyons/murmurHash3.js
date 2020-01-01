@@ -12,17 +12,17 @@ import {
 
 const ascendingBuf = (
   // tslint:disable-next-line: prefer-template
-  "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007" +
-  "\u0008\u0009\u000a\u000b\u000c\u000d\u000e\u000f" +
+  "\x00\x01\x02\x03\x04\x05\x06\x07" +
+  "\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f" +
   
-  "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017" +
-  "\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f" +
+  "\x10\x11\x12\x13\x14\x15\x16\x17" +
+  "\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f" +
   
-  "\u0020\u0021\u0022\u0023\u0024\u0025\u0026\u0027" +
-  "\u0028\u0029\u002a\u002b\u002c\u002d\u002e\u002f" +
+  "\x20\x21\x22\x23\x24\x25\x26\x27" +
+  "\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f" +
   
-  "\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037" +
-  "\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f"
+  "\x30\x31\x32\x33\x34\x35\x36\x37" +
+  "\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f"
 );
 
 const testVectors: Record<string, [u32, string, string]> = {
@@ -58,10 +58,10 @@ const testVectors: Record<string, [u32, string, string]> = {
     "03e5e14d358c16d1e5ae86df7ed5cfcb",
   ],
   // tslint:disable-next-line: object-literal-key-quotes
-  "我的气垫船装满了鳗鱼": [
-    1553108894,
-    "3ffaf018ca173b58c4e26affcd6a7d02",
-    "e52c1f398ab5f107e77b2d1eab4e8cc9",
+  "我的气垫船装满了鳗鱼。": [
+    4193185573,
+    "4a3b1d7c5f2763c2d6d5551f5f1e922f",
+    "454d3f37ec1eb384ab6fb47de3d07525",
   ],
   // Ignore for string chunk tests as emojis are multiple codepoints.
   "My 🚀 is full of 🦎.": [
@@ -131,9 +131,9 @@ describe.each(
       `${i.toString(16).padStart(2, "0")}${(255 - i).toString(16).padStart(2, "0")}`,
     ] as [Uint8Array, string]),
 )(
-  "bufToHex(new Uint8Array(%p))",
+  "bufToHex(Uint8Array %p)",
   (buf, expected) => {
-    test(`returns ${expected}`, () => {
+    test(`returns '${expected}'`, () => {
       expect(bufToHex(buf)).toBe(expected);
     });
   },
@@ -141,11 +141,11 @@ describe.each(
 
 
 describe.each(Object.entries(testVectorsx86hash32)
-  .map(([k, v]) => [JSON.stringify(k), k, v] as [string, string, u32]),
+  .map(([k, v]) => [k, v] as [string, u32]),
 )(
-  "x86.hash32(%s)",
+  "x86.hash32(%j)",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, str, expected) => {
+  (str, expected) => {
     test(`returns ${expected}`, () => {
       expect(x86.hash32(str)).toBe(expected);
     });
@@ -153,12 +153,12 @@ describe.each(Object.entries(testVectorsx86hash32)
 );
 
 describe.each(Object.entries(testVectorsx86hash128str)
-  .map(([k, v]) => [JSON.stringify(k), k, v]),
+  .map(([k, v]) => [k, v]),
 )(
-  "x86.hash128(%s)",
+  "x86.hash128(%j)",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, str, expected) => {
-    test(`returns ${expected}`, () => {
+  (str, expected) => {
+    test(`returns '${expected}'`, () => {
       expect(x86.hash128(str)).toBe(expected);
     });
   },
@@ -167,21 +167,21 @@ describe.each(Object.entries(testVectorsx86hash128str)
 describe.each(Object.entries(testVectorsx86hash128buf)
   .map(([k, v]) => [strToBuf(k), v]),
 )(
-  "x86.hash128(%p)",
+  "x86.hash128(Uint8Array %p)",
   (buf, expected) => {
-    test(`returns ${expected}`, () => {
+    test(`returns Uint8Array [${expected.join(", ")}]`, () => {
       expect(x86.hash128(buf)).toEqual(expected);
     });
   },
 );
 
 describe.each(Object.entries(testVectorsx64hash128str)
-  .map(([k, v]) => [JSON.stringify(k), k, v]),
+  .map(([k, v]) => [k, v]),
 )(
-  "x64.hash128(%s)",
+  "x64.hash128(%j)",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, str, expected) => {
-    test(`returns ${expected}`, () => {
+  (str, expected) => {
+    test(`returns '${expected}'`, () => {
       expect(x64.hash128(str)).toBe(expected);
     });
   },
@@ -190,9 +190,9 @@ describe.each(Object.entries(testVectorsx64hash128str)
 describe.each(Object.entries(testVectorsx64hash128buf)
   .map(([k, v]) => [strToBuf(k), v]),
 )(
-  "x64.hash128(%p)",
+  "x64.hash128(Uint8Array %p)",
   (buf, expected) => {
-    test(`returns ${expected}`, () => {
+    test(`returns Uint8Array [${expected.join(", ")}]`, () => {
       expect(x64.hash128(buf)).toEqual(expected);
     });
   },
@@ -205,13 +205,13 @@ describe.each(
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        JSON.stringify(k), i + 1, chunk(k, i + 1), v,
+        k, i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], u32])
     )),
 )(
-  "x86.hash32(chunk(%s, %p))",
+  "x86.hash32(chunk(%j, %p))",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, _size, chunks, expected) => {
+  (_k, _size, chunks, expected) => {
     test(`returns ${expected}`, () => {
       let state: u32 | x86hash32State = 0x0;
       for (const chunk of chunks) {
@@ -230,14 +230,14 @@ describe.each(
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        JSON.stringify(k), i + 1, chunk(k, i + 1), v,
+        k, i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], string])
     ),
 ))(
-  "x86.hash128(chunk(%s, %p))",
+  "x86.hash128(chunk(%j, %p))",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, _size, chunks, expected) => {
-    test(`returns ${expected}`, () => {
+  (_k, _size, chunks, expected) => {
+    test(`returns '${expected}'`, () => {
       let state: u32 | x86hash128State = 0x0;
       for (const chunk of chunks) {
         state = x86.hash128(chunk, state, false);
@@ -250,18 +250,18 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx86hash128buf)
-    .map(([k, v]) => ([strToBuf(k), k, v] as const))
-    .flatMap(([k, s, v]) => (
+    .map(([k, v]) => ([k, strToBuf(k), v] as const))
+    .flatMap(([k, b, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, k.byteLength - 1)).keys()].map(i => [
-        JSON.stringify(s), i + 1, chunk(k, i + 1), v,
+      [...new Array(Math.max(1, b.byteLength - 1)).keys()].map(i => [
+        k, i + 1, chunk(b, i + 1), v,
       ] as [string, number, Uint8Array[], Uint8Array])
     )),
 )(
-  "x86.hash128(chunk(strToBuf(%s), %p))",
+  "x86.hash128(chunk(strToBuf(%j), %p))",
   // tslint:disable-next-line: variable-name
-  (_jsonStr, _size, chunks, expected) => {
-    test(`returns ${expected}`, () => {
+  (_k, _size, chunks, expected) => {
+    test(`returns Uint8Array [${expected.join(", ")}]`, () => {
       let state: u32 | x86hash128State = 0x0;
       for (const chunk of chunks) {
         state = x86.hash128(chunk, state, false);
@@ -278,14 +278,14 @@ describe.each(
     .flatMap(([k, v]) => (
       // tslint:disable-next-line: prefer-array-literal
       [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        JSON.stringify(k), i + 1, chunk(k, i + 1), v,
+        k, i + 1, chunk(k, i + 1), v,
       ] as [string, number, string[], string])
     )),
 )(
-  "x64.hash128(chunk(%s, %p))",
+  "x64.hash128(chunk(%j, %p))",
   // tslint:disable-next-line: variable-name
   (_jsonStr, _size, chunks, expected) => {
-    test(`returns ${expected}`, () => {
+    test(`returns '${expected}'`, () => {
       let state: u32 | x64hash128State = 0x0;
       for (const chunk of chunks) {
         state = x64.hash128(chunk, state, false);
@@ -298,18 +298,18 @@ describe.each(
 
 describe.each(
   Object.entries(testVectorsx64hash128buf)
-    .map(([k, v]) => ([strToBuf(k), k, v] as const))
-    .flatMap(([k, s, v]) => (
+    .map(([k, v]) => ([k, strToBuf(k), v] as const))
+    .flatMap(([k, b, v]) => (
       // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, k.byteLength - 1)).keys()].map(i => [
-        JSON.stringify(s), i + 1, chunk(k, i + 1), v,
+      [...new Array(Math.max(1, b.byteLength - 1)).keys()].map(i => [
+        k, i + 1, chunk(b, i + 1), v,
       ] as [string, number, Uint8Array[], Uint8Array])
     )),
 )(
-  "x64.hash128(chunk(strToBuf(%s), %p))",
+  "x64.hash128(chunk(strToBuf(%j), %p))",
   // tslint:disable-next-line: variable-name
   (_jsonStr, _size, chunks, expected) => {
-    test(`returns ${expected}`, () => {
+    test(`returns Uint8Array [${expected.join(", ")}]`, () => {
       let state: u32 | x64hash128State = 0x0;
       for (const chunk of chunks) {
         state = x64.hash128(chunk, state, false);
