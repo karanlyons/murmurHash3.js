@@ -115,6 +115,14 @@ for (const [key, values] of Object.entries(testVectors)) {
 }
 
 
+describe(
+  "bufToHex()", () => {
+    test(`returns ''`, () => {
+      expect(bufToHex()).toBe('');
+    });
+  },
+);
+
 describe.each(
   // tslint:disable-next-line: prefer-array-literal
   [...new Array(256).keys()]

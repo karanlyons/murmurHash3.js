@@ -20,7 +20,7 @@ export const strToBuf = TextEncoder.prototype.encode.bind(new TextEncoder());
 // tslint:disable-next-line: prefer-array-literal
 const hexLUT = [...new Array(256).keys()].map(i => `00${i.toString(16)}`.slice(-2));
 
-export function bufToHex(buf: Uint8Array): string {
+export function bufToHex(buf: Uint8Array = new Uint8Array(0)): string {
   const str = [];
   for (let i = 0; i < buf.byteLength; i++) {
     str.push(hexLUT[buf[i]]);
