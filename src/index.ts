@@ -23,12 +23,12 @@ export const strToBuf = TextEncoder.prototype.encode.bind(new TextEncoder());
 const hexLUT = [...new Array(256).keys()].map(i => `00${i.toString(16)}`.slice(-2));
 
 export function bufToHex(buf: Uint8Array = new Uint8Array(0)): string {
-  const str = [];
+  let str = "";
   for (let i = 0; i < buf.byteLength; i++) {
-    str.push(hexLUT[buf[i]]);
+    str += hexLUT[buf[i]];
   }
   
-  return str.join("");
+  return str;
 }
 
 
