@@ -1,0 +1,12 @@
+os: linux
+language: node_js
+node_js:
+  - node
+  - lts/*
+cache: yarn
+script: yarn travis
+jobs:
+  include:
+    - stage: coveralls
+      node_js: node
+      script: yarn coveralls

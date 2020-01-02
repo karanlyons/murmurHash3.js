@@ -1,7 +1,0 @@
-.DS_Store
-**/__tests__/**
-/coverage
-/src
-jestconfig.json
-tsconfig.json
-tslint.json

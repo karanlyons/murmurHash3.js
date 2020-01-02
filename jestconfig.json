@@ -1,6 +1,7 @@
 {
   "preset": "ts-jest",
   "testEnvironment": "node",
+  "coverageReporters": ["text", "lcov", "json-summary"],
   "globals": {
     "ts-jest": {
       "tsConfig": "src/__tests__/tsconfig.json"

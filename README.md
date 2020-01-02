@@ -1,9 +1,13 @@
-[![npm version](https://badge.fury.io/js/murmurhash3.js.svg)](https://badge.fury.io/js/murmurhash3.js)
+# MurmurHash3.js - [MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp), in JavaScript.
 
-## MurmurHash3.js
-A javascript implementation of
-[MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp)’s
-hashing algorithms.
+
+[![NPM Package](https://img.shields.io/npm/v/murmurHash3.js?style=for-the-badge)](https://www.npmjs.com/package/murmurHash3.js)
+[![MIT License](https://img.shields.io/github/license/karanlyons/murmurHash3.js?style=for-the-badge)](https://github.com/karanlyons/murmurHash3.js/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/com/karanlyons/murmurHash3.js?style=for-the-badge)](https://travis-ci.com/karanlyons/murmurHash3.js)
+[![Coverage Status](https://img.shields.io/coveralls/github/karanlyons/murmurHash3.js?style=for-the-badge)](https://coveralls.io/github/karanlyons/murmurHash3.js)
+
+
+## Usage
 
 ```javascript
 > murmurHash3 = require('mumurHash3.js');
@@ -38,6 +42,9 @@ hashing algorithms.
   Uint8Array [44, 86, 200, 143, 219, 69, 3, 223, 211, 82, 178, 26, 73, 76, 162, 192];
 ```
 
+
+## API
+
 ```javascript
 murmurHash3 = {
   version: string,
@@ -64,6 +71,9 @@ murmurHash3 = {
   },
 }
 ```
+
+
+- - -
 
 Requires [`TextEncoder`](https://caniuse.com/#feat=textencoder),
 [Typed Arrays & `DataView`](https://caniuse.com/#feat=typedarrays), and additional
