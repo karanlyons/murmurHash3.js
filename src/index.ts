@@ -1,14 +1,12 @@
 /*!
  * +----------------------------------------------------------------------------------+
- * | murmurHash3.js v3.0.0 (http://github.com/karanlyons/murmurHash.js)               |
- * | A typescript/javascript implementation of MurmurHash3's x86 hashing algorithms.  |
+ * | murmurHash3.js v3.0.0 (http://github.com/karanlyons/murmurHash3.js)              |
+ * | A TypeScript/JavaScript implementation of MurmurHash3's hashing algorithms.      |
  * |----------------------------------------------------------------------------------|
  * | Copyright (c) 2012-2020 Karan Lyons. Freely distributable under the MIT license. |
  * +----------------------------------------------------------------------------------+
  */
 
-
-export const version = '3.0.0';
 
 type Brand<Name, Type> = Type & {_type?: Name};
 export type u32 = Brand<'u32', number>;
@@ -19,8 +17,7 @@ type u64spill = Brand<'u64spill', [u32, u32, u32, u32]>;
 
 export const strToBuf = TextEncoder.prototype.encode.bind(new TextEncoder());
 
-// tslint:disable-next-line: prefer-array-literal
-const hexLUT = [...new Array(256).keys()].map(i => `00${i.toString(16)}`.slice(-2));
+const hexLUT = Array.from({ length: 256 }, (_, i) => `00${i.toString(16)}`.slice(-2));
 
 export function bufToHex(buf: Uint8Array = new Uint8Array(0)): string {
   let str = "";

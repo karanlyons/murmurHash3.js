@@ -124,12 +124,13 @@ describe(
 );
 
 describe.each(
-  // tslint:disable-next-line: prefer-array-literal
-  [...new Array(256).keys()]
-    .map(i => [
+  Array.from(
+    { length: 256 },
+    (_, i) => [
       new Uint8Array([i, 255 - i]),
       `${i.toString(16).padStart(2, "0")}${(255 - i).toString(16).padStart(2, "0")}`,
-    ] as [Uint8Array, string]),
+    ] as [Uint8Array, string],
+  ),
 )(
   "bufToHex(Uint8Array %p)",
   (buf, expected) => {
@@ -144,7 +145,6 @@ describe.each(Object.entries(testVectorsx86hash32)
   .map(([k, v]) => [k, v] as [string, u32]),
 )(
   "x86.hash32(%j)",
-  // tslint:disable-next-line: variable-name
   (str, expected) => {
     test(`returns ${expected}`, () => {
       expect(x86.hash32(str)).toBe(expected);
@@ -156,7 +156,6 @@ describe.each(Object.entries(testVectorsx86hash128str)
   .map(([k, v]) => [k, v]),
 )(
   "x86.hash128(%j)",
-  // tslint:disable-next-line: variable-name
   (str, expected) => {
     test(`returns '${expected}'`, () => {
       expect(x86.hash128(str)).toBe(expected);
@@ -179,7 +178,6 @@ describe.each(Object.entries(testVectorsx64hash128str)
   .map(([k, v]) => [k, v]),
 )(
   "x64.hash128(%j)",
-  // tslint:disable-next-line: variable-name
   (str, expected) => {
     test(`returns '${expected}'`, () => {
       expect(x64.hash128(str)).toBe(expected);
@@ -203,10 +201,12 @@ describe.each(
   Object.entries(testVectorsx86hash32)
     .slice(0, -1)
     .flatMap(([k, v]) => (
-      // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        k, i + 1, chunk(k, i + 1), v,
-      ] as [string, number, string[], u32])
+      Array.from(
+        { length: Math.max(1, k.length - 1) },
+        (_, i) => [
+          k, i + 1, chunk(k, i + 1), v,
+        ] as [string, number, string[], u32],
+      )
     )),
 )(
   "x86.hash32(chunk(%j, %p))",
@@ -228,12 +228,14 @@ describe.each(
   Object.entries(testVectorsx86hash128str)
     .slice(0, -1)
     .flatMap(([k, v]) => (
-      // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        k, i + 1, chunk(k, i + 1), v,
-      ] as [string, number, string[], string])
-    ),
-))(
+      Array.from(
+        { length: Math.max(1, k.length - 1) },
+        (_, i) => [
+          k, i + 1, chunk(k, i + 1), v,
+        ] as [string, number, string[], string],
+      )
+    )),
+)(
   "x86.hash128(chunk(%j, %p))",
   // tslint:disable-next-line: variable-name
   (_k, _size, chunks, expected) => {
@@ -252,10 +254,12 @@ describe.each(
   Object.entries(testVectorsx86hash128buf)
     .map(([k, v]) => ([k, strToBuf(k), v] as const))
     .flatMap(([k, b, v]) => (
-      // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, b.byteLength - 1)).keys()].map(i => [
-        k, i + 1, chunk(b, i + 1), v,
-      ] as [string, number, Uint8Array[], Uint8Array])
+      Array.from(
+        { length: Math.max(1, b.byteLength - 1) },
+        (_, i) => [
+          k, i + 1, chunk(b, i + 1), v,
+        ] as [string, number, Uint8Array[], Uint8Array],
+      )
     )),
 )(
   "x86.hash128(chunk(strToBuf(%j), %p))",
@@ -276,10 +280,12 @@ describe.each(
   Object.entries(testVectorsx64hash128str)
     .slice(0, -1)
     .flatMap(([k, v]) => (
-      // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, k.length - 1)).keys()].map(i => [
-        k, i + 1, chunk(k, i + 1), v,
-      ] as [string, number, string[], string])
+      Array.from(
+        { length: Math.max(1, k.length - 1) },
+        (_, i) => [
+          k, i + 1, chunk(k, i + 1), v,
+        ] as [string, number, string[], string],
+      )
     )),
 )(
   "x64.hash128(chunk(%j, %p))",
@@ -300,10 +306,12 @@ describe.each(
   Object.entries(testVectorsx64hash128buf)
     .map(([k, v]) => ([k, strToBuf(k), v] as const))
     .flatMap(([k, b, v]) => (
-      // tslint:disable-next-line: prefer-array-literal
-      [...new Array(Math.max(1, b.byteLength - 1)).keys()].map(i => [
-        k, i + 1, chunk(b, i + 1), v,
-      ] as [string, number, Uint8Array[], Uint8Array])
+      Array.from(
+        { length: Math.max(1, b.byteLength - 1) },
+        (_, i) => [
+          k, i + 1, chunk(b, i + 1), v,
+        ] as [string, number, Uint8Array[], Uint8Array],
+      )
     )),
 )(
   "x64.hash128(chunk(strToBuf(%j), %p))",

@@ -1,20 +1,22 @@
 {
   "name": "murmurhash3.js",
-  "description": "All of MurmurHash3, in javascript.",
   "version": "3.0.0",
+  "description": "MurmurHash3, in JavaScript.",
+  "license": "MIT",
+  "homepage": "https://github.com/karanlyons/murmurHash3.js",
   "author": {
     "name": "Karan Lyons",
     "email": "karan@karanlyons.com"
   },
-  "copyright": "© 2012–2020, Karan Lyons",
-  "license": "MIT",
+  "repository": "github:karanlyons/murmurHash3.js",
+  "bugs": "https://github.com/karanlyons/murmurHash3.js/issues",
   "keywords": [
     "murmurhash",
     "murmmurhash3",
     "hash",
     "hashing",
-    "progressive hash",
-    "progressive hashing"
+    "progressive",
+    "incremental"
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -22,12 +24,10 @@
     "clean": "rm -rf ./lib ./coverage",
     "lint": "tslint --project tsconfig.json --format stylish",
     "test": "jest --config jestconfig.json --coverage",
-    "test:watch": "jest --config jestconfig.json --coverage --watch",
     "build": "tsc",
-    "build:watch": "tsc --watch",
     "travis": "jest --config jestconfig.json",
     "coveralls": "jest --config jestconfig.json --silent --coverage --coverageReporters=text-lcov | coveralls",
-    "prepublishOnly": "npm run-script clean && npm run-script lint && npm run-script test && jq -e '.total | to_entries | map(.value.pct) | min == 100' ./coverage/coverage-summary.json && npm run-script build"
+    "prepublishOnly": "npm run clean && npm run lint && npm run test && jq -e '.total | to_entries | map(.value.pct) | min == 100' ./coverage/coverage-summary.json && npm run build && find ./lib -type f \\( -name '*.js' -o -name '*.d.ts' \\) -exec sed -i '' 'h;s/[^ ].*//;s/    /  /g;G;s/\\n *//' '{}' \\;"
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",

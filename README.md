@@ -1,7 +1,7 @@
 # MurmurHash3.js - [MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp), in JavaScript.
 
 
-[![NPM Package](https://img.shields.io/npm/v/murmurHash3.js?style=for-the-badge)](https://www.npmjs.com/package/murmurHash3.js)
+[![NPM Package](https://img.shields.io/npm/v/murmurHash3.js?style=for-the-badge)](https://www.npmjs.com/package/murmurhash3.js)
 [![MIT License](https://img.shields.io/github/license/karanlyons/murmurHash3.js?style=for-the-badge)](https://github.com/karanlyons/murmurHash3.js/blob/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/com/karanlyons/murmurHash3.js?style=for-the-badge)](https://travis-ci.com/karanlyons/murmurHash3.js)
 [![Coverage Status](https://img.shields.io/coveralls/github/karanlyons/murmurHash3.js?style=for-the-badge)](https://coveralls.io/github/karanlyons/murmurHash3.js)
@@ -10,7 +10,7 @@
 ## Usage
 
 ```javascript
-> murmurHash3 = require('mumurHash3.js');
+> const murmurHash3 = require('murmurhash3.js');
 
 // Return a 32bit hash as an unsigned integer:
 > murmurHash3.x86.hash32("I will not buy this record, it is scratched.");
@@ -27,7 +27,7 @@
   2520298415
 
 // Hash buffers:
-> const buf = new Uint8Array([...new Array(256).keys()]);
+> const buf = new Uint8Array(Array.from({ length: 256}, (_, i) => i));
 > murmurHash3.x86.hash32(buf);
   3825864278
 > murmurHash3.x86.hash128(buf);
@@ -47,7 +47,6 @@
 
 ```javascript
 murmurHash3 = {
-  version: string,
   strToBuf: (str: string = ""): Uint8Array,
   bufToHex: (buf: Uint8Array = new Uint8Array(0)): string,
   x86: {
